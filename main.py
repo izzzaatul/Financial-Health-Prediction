@@ -35,12 +35,13 @@ class FinancialFeatureGate(tf.keras.layers.Layer):
         return config
 
 # Konfigurasi Path Artefak
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_DIR = os.path.dirname(BASE_DIR)
+# Mengambil path absolut dari folder tempat main.py berada
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-MODEL_PATH = os.path.join(PROJECT_DIR, 'artifacts', 'final_financial_health_classifier.keras')
-SCALER_PATH = os.path.join(PROJECT_DIR, 'artifacts', 'financial_health_scaler.pkl')
-LABEL_MAPPING_PATH = os.path.join(PROJECT_DIR, 'artifacts', 'cluster_to_label.pkl')
+# Gabungkan dengan folder artifacts secara benar
+MODEL_PATH = os.path.join(CURRENT_DIR, 'artifacts', 'final_financial_health_classifier.keras')
+SCALER_PATH = os.path.join(CURRENT_DIR, 'artifacts', 'financial_health_scaler.pkl')
+LABEL_MAPPING_PATH = os.path.join(CURRENT_DIR, 'artifacts', 'cluster_to_label.pkl')
 
 # Memuat Artefak Model dan Scaler
 try:
