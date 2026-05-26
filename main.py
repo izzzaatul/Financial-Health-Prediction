@@ -181,8 +181,6 @@ def generate_ai_recommendation(prediction_label: str, confidence: float, ratios:
     if client is None:
         return generate_fallback_recommendation(prediction_label), 'fallback_no_gemini_api_key'
 
-    sisa_pendapatan_persen = ratios['disposable_income_ratio'] * 100  # <--- INI JANGAN SAMPAI LOLOS!
-
     prompt = f"""
 Kamu adalah asisten finansial pribadi yang ramah dan suportif untuk aplikasi pencatatan keuangan.
 
@@ -206,6 +204,7 @@ Instruksi Gaya Bahasa & Format (PENTING):
 Contoh gaya bahasa yang diinginkan jika statusnya bagus:
 "Kondisi keuangan Anda bulan ini terlihat sangat baik, dengan pengeluaran yang terkontrol membuat Anda memiliki ruang finansial yang luas. Ini menunjukkan manajemen keuangan yang sangat efisien, di mana sebagian besar pendapatan Anda, yaitu {sisa_pendapatan_persen:.0f}%, berhasil Anda sisihkan. Pertahankan kebiasaan baik ini, dan manfaatkan sisa dana Anda untuk mempercepat pencapaian tujuan finansial seperti tabungan darurat atau rencana masa depan yang lebih besar."
 """
+    
     try:
         response = client.models.generate_content(
             model='gemini-2.5-flash',
