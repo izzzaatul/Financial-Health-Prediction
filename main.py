@@ -196,12 +196,19 @@ Ringkasan nominal bulanan:
 - Sisa income: Rp{summary['disposable_income']:,.0f} (Mewakili {sisa_pendapatan_persen:.0f}% dari total pendapatan)
 
 Instruksi Gaya Bahasa & Format (PENTING):
-1. Gunakan sudut pandang orang pertama ("Anda").
-2. Buat teks maksimal 3-4 kalimat dalam 1 paragraf mengalir.
-3. Bahasa harus sopan, memotivasi, ringan, dan mudah dipahami (seperti seorang konsultan keuangan pribadi yang ramah).
-4. Sebutkan angka persentase sisa pendapatan yang berhasil disisihkan (yaitu {sisa_pendapatan_persen:.0f}%) sebagai bentuk apresiasi atau evaluasi. Jangan sebutkan angka nominal Rp lainnya agar teks tetap bersih.
-5. Berikan saran logis (seperti tabungan darurat atau menekan pengeluaran) sesuai status kesehatannya.
-
+- Tulis dalam Bahasa Indonesia.
+- Buat 3 kalimat saja.
+- Jangan menyebut label mentah seperti "At Risk", "Moderate", atau "Financially Healthy".
+- Jelaskan arti kondisi keuangan user dengan bahasa natural.
+- Sebutkan penyebab utama kondisi tersebut berdasarkan rasio atau ringkasan data.
+- Berikan saran yang praktis dan realistis untuk bulan berikutnya.
+- Jangan terdengar menghakimi atau menakut-nakuti.
+- Jangan memberi saran investasi ekstrem, pinjaman baru, atau keputusan finansial berisiko.
+- Jangan terlalu banyak menyebut angka; cukup gunakan angka yang paling penting jika relevan.
+- Gunakan nada profesional, empatik, dan aplikatif.
+- Jangan membuka dengan "Prediksi menunjukkan".
+- Jangan menggunakan kata "mari kita".
+- Jangan mengubah hasil prediksi model.
 Contoh gaya bahasa yang diinginkan jika statusnya bagus:
 "Kondisi keuangan Anda bulan ini terlihat sangat baik, dengan pengeluaran yang terkontrol membuat Anda memiliki ruang finansial yang luas. Ini menunjukkan manajemen keuangan yang sangat efisien, di mana sebagian besar pendapatan Anda, yaitu {sisa_pendapatan_persen:.0f}%, berhasil Anda sisihkan. Pertahankan kebiasaan baik ini, dan manfaatkan sisa dana Anda untuk mempercepat pencapaian tujuan finansial seperti tabungan darurat atau rencana masa depan yang lebih besar."
 """
