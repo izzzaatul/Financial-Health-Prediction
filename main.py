@@ -182,35 +182,27 @@ def generate_ai_recommendation(prediction_label: str, confidence: float, ratios:
         return generate_fallback_recommendation(prediction_label), 'fallback_no_gemini_api_key'
 
     prompt = f"""
-Kamu adalah asisten finansial untuk aplikasi pencatatan keuangan pribadi.
+Kamu adalah asisten finansial pribadi yang ramah dan suportif untuk aplikasi pencatatan keuangan.
 
-Buat rekomendasi finansial singkat dalam Bahasa Indonesia berdasarkan hasil prediksi model berikut.
+Tugasmu adalah membuat rekomendasi finansial singkat, hangat, dan profesional berdasarkan data pengguna berikut:
 
 Hasil prediksi kesehatan finansial:
 - Status: {prediction_label}
-- Confidence model: {confidence:.2f}
 
 Ringkasan nominal bulanan:
 - Income: Rp{summary['income']:,.0f}
 - Total pengeluaran: Rp{summary['total_expense']:,.0f}
-- Sisa income: Rp{summary['disposable_income']:,.0f}
-- Pengeluaran esensial: Rp{summary['essential_expense']:,.0f}
-- Pengeluaran gaya hidup: Rp{summary['discretionary_spending']:,.0f}
+- Sisa income: Rp{summary['disposable_income']:,.0f} (Mewakili {sisa_pendapatan_persen:.0f}% dari total pendapatan)
 
-Rasio finansial:
-- Expense to Income Ratio: {ratios['expense_to_income_ratio']:.2f}
-- Essential Ratio: {ratios['essential_ratio']:.2f}
-- Disposable Income Ratio: {ratios['disposable_income_ratio']:.2f}
-- Loan to Income Ratio: {ratios['loan_to_income_ratio']:.2f}
-- Discretionary Ratio: {ratios['discretionary_ratio']:.2f}
+Instruksi Gaya Bahasa & Format (PENTING):
+1. Gunakan sudut pandang orang pertama ("Anda").
+2. Buat teks maksimal 3-4 kalimat dalam 1 paragraf mengalir.
+3. Bahasa harus sopan, memotivasi, ringan, dan mudah dipahami (seperti seorang konsultan keuangan pribadi yang ramah).
+4. Sebutkan angka persentase sisa pendapatan yang berhasil disisihkan (yaitu {sisa_pendapatan_persen:.0f}%) sebagai bentuk apresiasi atau evaluasi. Jangan sebutkan angka nominal Rp lainnya agar teks tetap bersih.
+5. Berikan saran logis (seperti tabungan darurat atau menekan pengeluaran) sesuai status kesehatannya.
 
-Instruksi:
-- Buat maksimal 3 kalimat.
-- Gunakan bahasa yang ringan, sopan, dan mudah dipahami.
-- Jangan memberi nasihat investasi ekstrem.
-- Jangan menyebut angka terlalu banyak.
-- Fokus pada pengeluaran, cicilan, kebutuhan esensial, dan sisa pendapatan.
-- Jangan mengubah label prediksi dari model.
+Contoh gaya bahasa yang diinginkan jika statusnya bagus:
+"Kondisi keuangan Anda bulan ini terlihat sangat baik, dengan pengeluaran yang terkontrol membuat Anda memiliki ruang finansial yang luas. Ini menunjukkan manajemen keuangan yang sangat efisien, di mana sebagian besar pendapatan Anda, yaitu {sisa_pendapatan_persen:.0f}%, berhasil Anda sisihkan. Pertahankan kebiasaan baik ini, dan manfaatkan sisa dana Anda untuk mempercepat pencapaian tujuan finansial seperti tabungan darurat atau rencana masa depan yang lebih besar."
 """
     try:
         response = client.models.generate_content(
