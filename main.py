@@ -180,7 +180,8 @@ def generate_fallback_recommendation(prediction_label: str):
 def generate_ai_recommendation(prediction_label: str, confidence: float, ratios: dict, summary: dict):
     if client is None:
         return generate_fallback_recommendation(prediction_label), 'fallback_no_gemini_api_key'
-
+        
+    sisa_pendapatan_persen = ratios['disposable_income_ratio'] * 100
     prompt = f"""
 Kamu adalah asisten finansial pribadi yang ramah dan suportif untuk aplikasi pencatatan keuangan.
 
